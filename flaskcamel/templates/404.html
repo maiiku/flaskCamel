@@ -1,0 +1,33 @@
+{% from "util.html" import render_field %}
+
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script>
+        $(function(){
+            $('#date').datepicker({format: 'yyyy-mm-dd'});
+        });
+        window.onload=function(){
+            initialize();
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="row well">
+    <div id="features">
+        <div class="container">
+            <div class="row">
+                <div class="span6 feature">
+                    <h3>Sorry!!!</h3>
+                    <p class="description">
+                        <b>404. </b> That's an error.</br></br>
+                        The requested URL was not found on this server. <i>That’s all we know.</i>
+                    </p>
+                    <p>Why don't you visit home page at <a href="{{url_for('index')}}" class="btn btn-black">Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

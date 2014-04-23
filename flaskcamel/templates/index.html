@@ -1,0 +1,33 @@
+{% from "util.html" import render_field %}
+
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script>
+        $(function(){
+            $('#date').datepicker({format: 'yyyy-mm-dd'});
+        });
+        window.onload=function(){
+            initialize();
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid well">
+    {% if current_user.get_role() == '1' %}
+        <a href="{{url_for('add_detail')}}" class="btn btn-large">Add person details</a></br></br>
+        <h4>Your Applications:</br></h4>
+        <div="row">
+            <ol>
+            {% for entry in appslist %}
+                <li><h3>{{ entry.website }}</h3></li>             
+            {% else %}
+              <em>You have added no details so far.</em>
+            {% endfor %}
+            </ol>
+        </div>
+    {% endif %}
+      
+    </div>
+{% endblock %}

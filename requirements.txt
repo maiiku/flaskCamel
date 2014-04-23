@@ -1,0 +1,11 @@
+werkzeug==0.8.3
+flask==0.9
+Flask-Login==0.1.3
+Flask-Mail
+Flask-WTF
+Flask-OAuth
+Flask-Bcrypt
+Flask-DebugToolbar
+Flask-Admin
+WTAlchemy
+itsdangerous

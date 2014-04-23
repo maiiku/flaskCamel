@@ -1,0 +1,40 @@
+{% from "util.html" import render_field %}
+
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script>
+        $(function(){
+            $('#date').datepicker({format: 'yyyy-mm-dd'});
+        });
+        window.onload=function(){
+            initialize();
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="row well">
+ 
+   <div id="features">
+        <div class="container">
+            
+            <!-- product list -->
+            <div class="row">
+                <div class="span6 feature">
+                    
+                    <h3>
+                        Opps!!!
+                    </h3>
+                    <p class="description">
+                      <b>500. </b> That's an error.</br></br>
+                      Something went wrong on server side. <i>Will fix it soon.</i>
+                    </p>
+                    <p>Refresh or Reload page after few seconds.</p>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

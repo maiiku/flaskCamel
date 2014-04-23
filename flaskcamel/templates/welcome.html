@@ -1,0 +1,38 @@
+{% from "util.html" import render_field %}
+
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script>
+        $(function(){
+            $('#date').datepicker({format: 'yyyy-mm-dd'});
+        });
+        window.onload=function(){
+            initialize();
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="row well">
+    <div id="features">
+        <div class="container">
+            <div class="row">
+                <div class="span12 feature">
+                    <h3>
+                        <b>flaskCamel</b> - the magic box for flask applications
+                    </h3>
+                    <p class="description">
+                       <b>flaskCamel</b> is a python based flask microframework
+                       applcation which includes features like oAuth,
+                       User Account Management, Email, Password Reset, Admin and so on.
+                    </p>
+                    <a href="{{url_for('register')}}" class="btn btn-black">Register</a>
+                    or
+                    <a href="{{url_for('fblogin')}}" class="btn btn-blue">Sign Up with Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

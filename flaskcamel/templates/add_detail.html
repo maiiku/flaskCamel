@@ -1,0 +1,52 @@
+{% from "util.html" import render_field %}
+
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script>
+        $(function(){
+            $('#date').datepicker({format: 'yyyy-mm-dd'});
+        });
+        window.onload=function(){
+            initialize();
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid well">
+     <h2>Submit your details</h1></br>
+      <form method="post">
+         {{ form.hidden_tag() }}
+      <h3>Contact information</h3></br>
+      <p>Please fill in the details below carefully as this information will be used to verify and setup your account.</p>
+      
+      <table>
+        <tr>
+          <td class="table-right-align">Person Name:</td> <td>{{ render_field(form.name, label=False, class="input-xlarge", autofocus="autofocus") }}</td>
+        </tr>
+        <tr>
+          <td class="table-right-align">Street Address:</td> <td>{{ render_field(form.street, label=False, class="input-xlarge", autofocus="autofocus") }}</td>
+        </tr>
+        <tr>
+          <td class="table-right-align">City/Town:</td> <td>{{ render_field(form.city, label=False, class="input-xlarge", autofocus="autofocus") }}</td>
+        </tr>
+        <tr>
+          <td class="table-right-align">Phone:</td> <td>{{ render_field(form.phone, label=False, class="input-xlarge", autofocus="autofocus") }}</td>
+        </tr>
+      </table></br>
+
+      <h3>Website information</h3></br>
+       <table>
+        <tr>
+          <td class="table-right-align">User website:</td> <td>{{ render_field(form.website, label=False, class="input-xlarge", autofocus="autofocus") }}</td>
+        </tr>
+      </table></br>
+      <p>We will inform you when user details are verified.</p>
+        </tr>
+    </br>
+      <button class="btn" type="submit">Submit my application</button>
+    </form>
+
+    </div>
+{% endblock %}

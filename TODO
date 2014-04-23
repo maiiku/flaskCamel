@@ -1,0 +1,5 @@
+#TODO
+
+Write tests
+Create user profiles
+Use MySql or PostGresql instead of sqlalchemy
