@@ -13,7 +13,7 @@ worrying about implementation of common features required in web applications.
 - Create Virtualenv.
 - Install dependencies `sudo pip install -r requirements.txt`
 - Change config settings in `flaskcamel/config.py` such as `MAIL_USERNAME`, `MAIL_PASSWORD` and DB settings if you wish.
-- Also change facebook application settings in `falskcamel/views.py` to use valid credentials.
+- Also change facebook application settings in `flaskcamel/views.py` to use valid credentials.
 - Start application using: `python manage.py`
 - Visit `http://localhost:5000` to access the application.
 
