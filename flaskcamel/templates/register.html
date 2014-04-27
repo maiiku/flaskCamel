@@ -11,5 +11,5 @@
         {{ render_field(form.email, label=True, class="input-xlarge", autofocus="autofocus", errors=error) }}
         <button class="btn" type="submit">Register</button>
     </form>
-    <a href="{{url_for('fblogin')}}" class="btn btn-blue">Sign Up with Facebook</a>
+    <a href="{{url_for('facebook_login')}}" class="btn btn-blue">Sign Up with Facebook</a>
 {% endblock %}
