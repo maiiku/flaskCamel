@@ -12,7 +12,7 @@ from flask.ext.oauth import OAuth
 
 from forms import SignupForm, LoginForm, PasswordResetForm, PasswordChangeForm, DetailForm
 from flaskcamel import app, db
-from models import Users, userdetail
+from models import Users, UserDetail
 from decorators import async
 
 oauth = OAuth()
@@ -67,9 +67,9 @@ def load_user(uid):
 def index():
     if current_user.is_authenticated():
         if current_user.get_role() == '1':
-            appslist = userdetail.query \
+            appslist = UserDetail.query \
                                  .filter_by(uid=current_user.get_id()) \
-                                 .order_by(db.desc(userdetail.website))
+                                 .order_by(db.desc(UserDetail.website))
             return render_template('index.html', appslist=appslist)
 
     return render_template('welcome.html')
@@ -87,7 +87,7 @@ def add_detail():
     if current_user.get_role() == '1':
         form = DetailForm()
         if form.validate_on_submit():
-            _detail = userdetail(
+            _detail = UserDetail(
                 form.name.data,
                 form.street.data,
                 form.city.data,
@@ -141,7 +141,7 @@ def confirm_user(username, email):
 
 
 @app.route('/confirmaccount/<secretstring>', methods=['GET', 'POST'])
-def confirmaccount(secretstring):
+def confirm_account(secretstring):
     s = URLSafeSerializer('serliaizer_code')
     uname, uemail = s.loads(secretstring)
     user = Users.query.filter_by(username=uname).first()
@@ -176,7 +176,7 @@ def login():
 
 
 @app.route('/passwordreset', methods=['GET', 'POST'])
-def resetpassword():
+def reset_password():
     form = PasswordResetForm()
     if form.validate_on_submit():
         if form.username.data:
@@ -200,16 +200,16 @@ def resetpassword():
             send_async_email(msg)
             
             flash('Email sent to: ' + user.email)
-            return redirect(url_for('resetpassword'))
+            return redirect(url_for('reset_password'))
         else:
             flash('No such user')
-            return redirect(url_for('resetpassword'))
+            return redirect(url_for('reset_password'))
     flash(u'Enter your email or username')
     return render_template('reset_password.html', form=form)
 
 
 @app.route('/passwordreset/<secretstring>', methods=['GET', 'POST'])
-def changepassword(secretstring):
+def change_password(secretstring):
     form = PasswordChangeForm()
     if form.validate_on_submit():
       
@@ -224,7 +224,7 @@ def changepassword(secretstring):
             return redirect(url_for('login'))
         else:
             flash('Try again!')
-            return redirect(url_for('resetpassword'))
+            return redirect(url_for('reset_password'))
 
     return render_template('change_password.html', form=form)
 
@@ -240,7 +240,7 @@ def logout():
 #Facebook OAuth integration
 
 @app.route('/fblogin')
-def fblogin():
+def facebook_login():
     return facebook.authorize(callback=url_for('facebook_authorized',
                               next=request.args.get('next') or request.referrer or None,
                               _external=True))

@@ -54,7 +54,7 @@ class Users(db.Model, UserMixin):
 
 
 # Model for User Details
-class userdetail(db.Model):
+class UserDetail(db.Model):
     __tablename__ = 'userdetail'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
@@ -65,7 +65,7 @@ class userdetail(db.Model):
     date = db.Column(db.Date, nullable=True)
     uid = db.Column(db.Integer, db.ForeignKey('users.uid'))
     user = db.relationship('Users',
-                           primaryjoin="Users.uid == userdetail.uid",
+                           primaryjoin="Users.uid == UserDetail.uid",
                            backref=db.backref('users', lazy="joined"))
 
     def __init__(self, name, street, city, phone, website, date, uid):
@@ -109,21 +109,21 @@ class UsersAdmin(sqla.ModelView):
 
 
 # Customized UserDetail model admin
-class userdetailAdmin(sqla.ModelView):
+class UserDetailAdmin(sqla.ModelView):
     column_sortable_list = ('name', 'uid', 'date', 'website')
     column_labels = dict(title='Comment Title')
-    column_searchable_list = ('website', userdetail.website)
+    column_searchable_list = ('website', UserDetail.website)
     column_filters = ('uid',
                       'website',
                       'date',
                       'name',
-                      filters.FilterLike(userdetail.website, 'Fixed Title',
+                      filters.FilterLike(UserDetail.website, 'Fixed Title',
                                          options=(('test1', 'Test 1'),
                                                   ('test2', 'Test 2'))))
     form_args = dict(text=dict(label='Big Text', validators=[]))
 
     def __init__(self, session):
-        super(userdetailAdmin, self).__init__(userdetail, session)
+        super(UserDetailAdmin, self).__init__(UserDetail, session)
 
     def is_accessible(self):
         if current_user.get_role() == '0':
@@ -134,4 +134,4 @@ admin = admin.Admin(app, 'FlaskCamel Admin')
 
 # Add views to admin
 admin.add_view(UsersAdmin(db.session))
-admin.add_view(userdetailAdmin(db.session))
+admin.add_view(UserDetailAdmin(db.session))
