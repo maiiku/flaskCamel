@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flaskext.bcrypt import Bcrypt
+from flask.ext.bcrypt import Bcrypt
 from flask.ext import admin
 from flask.ext.login import current_user, UserMixin
 from flask.ext.admin.contrib import sqla
